@@ -1,0 +1,125 @@
+{
+  "layer": "top",
+  "position": "top",
+  "mode": "dock",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "spacing": 10,
+  "height": 36,
+
+  "modules-left": ["custom/weather", "hyprland/workspaces","custom/mpris"],
+  "modules-center": [],
+  "modules-right": [ "network", "pulseaudio", "battery", "clock"],
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "urgent": "",
+      "active": "",
+      "default": ""
+    }
+  },
+  
+  "battery": {
+    "states": {
+        "warning": 30,
+        "critical": 15
+    },
+    
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " ",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+  },
+  
+  "clock": {
+    "tooltip-format": "<big>{:%Y %B}</big>",
+    "format": "{:%a %d/%m, %H:%M}",
+    "format-alt": "{:%F %T}",
+    "interval": 1,
+  },
+
+  "custom/weather": {
+      "format": "{}°",
+      "tooltip": true,
+      "interval": 3600,
+      "exec": "wttrbar",
+      "return-type": "json"
+  },
+
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰈀 ",
+    "format-disconnected": "󰤮 ", 
+    "tooltip-format": "{ipaddr}",
+    "format-linked": "󰈁 {ifname} (No IP)",
+    "tooltip-format-wifi": "{essid} {icon} {signalStrength}%",
+    "tooltip-format-ethernet": "{ifname} 󰌘 ",
+    "tooltip-format-disconnected": "󰤮 ",
+    "max-length": 50,
+    "format-icons": ["󰤯 ","󰤟 ","󰤢 ","󰤥 "," "]
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}",
+    "format-muted": "婢",
+    "on-click": "pavucontrol -t 3",
+    "on-click-middle": "~/.local/bin/volumecontrol.sh -o m",
+    "on-scroll-up": "~/.local/bin/volumecontrol.sh -o i",
+    "on-scroll-down": "~/.local/bin/volumecontrol.sh -o d",
+    "tooltip-format": "{icon} {desc} // {volume}%",
+    "scroll-step": 5,
+    "format-icons": {
+        "headphone": "",
+        "hands-free": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", "", "󰕾", ""]
+    }
+  },
+  "pulseaudio#microphone": {
+      "format": "{format_source}",
+      "format-source": "",
+      "format-source-muted": "",
+      "on-click": "pavucontrol -t 4",
+      "on-click-middle": "~/.local/bin/volumecontrol.sh -i m",
+      "on-scroll-up": "~/.local/bin/volumecontrol.sh -i i",
+      "on-scroll-down": "~/.local/bin/volumecontrol.sh -i d",
+      "tooltip-format": "{format_source} {source_desc} // {source_volume}%",
+      "scroll-step": 5
+    },
+
+
+"bluetooth": {
+    "format": "",
+    "format-disabled": "󰂳",
+    "format-connected": "󰂱 {num_connections}",
+    "tooltip-format": " {device_alias}",
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": " {device_alias} 󰂄{device_battery_percentage}%",
+    "tooltip": true,
+    "on-click": "blueman-manager"
+  },
+
+  "custom/mpris": {
+    "exec": "~/.local/bin/mpris.sh",
+    "return-type": "json",
+    "format": "<span rise='-800'>{icon} </span> {}",
+    "format-icons": {
+      "playing": "󰐍",
+      "paused": "󰏦"
+    },
+    "on-click": "playerctl play-pause",
+    "max-length": 50
+  },
+}
